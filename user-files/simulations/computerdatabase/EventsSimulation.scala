@@ -24,6 +24,8 @@ class EventsSimulation extends Simulation {
 
   val serverUrl = System.getProperty("SERVER_DOMAIN")
   val endpointUrl = System.getProperty("SERVER_ENDPOINT")
+  val MAX_NB_USERS = System.getProperty("MAX_NB_USERS")
+  val TEST_DURATION = System.getProperty("TEST_DURATION")
 
   val httpProtocol = http
     .baseUrl(serverUrl) // Here is the root for all relative URLs
@@ -55,9 +57,6 @@ class EventsSimulation extends Simulation {
   val scn = scenario("Scenario Name") // A scenario is a chain of requests and pauses
     .feed(feeder)
     .exec(ThrottleEvents.throttle)
-
-  val MAX_NB_USERS = 10000
-  val TEST_DURATION = 60
 
    setUp(
     scn.inject(
