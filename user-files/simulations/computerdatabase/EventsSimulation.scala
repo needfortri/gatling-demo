@@ -24,8 +24,8 @@ class EventsSimulation extends Simulation {
 
   val serverUrl = System.getProperty("SERVER_DOMAIN")
   val endpointUrl = System.getProperty("SERVER_ENDPOINT")
-  val MAX_NB_USERS = System.getProperty("MAX_NB_USERS")
-  val TEST_DURATION = System.getProperty("TEST_DURATION")
+  val MAX_NB_USERS = System.getProperty("MAX_NB_USERS").toInt
+  val TEST_DURATION = System.getProperty("TEST_DURATION").toInt
 
   val httpProtocol = http
     .baseUrl(serverUrl) // Here is the root for all relative URLs
