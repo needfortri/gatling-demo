@@ -23,7 +23,7 @@ git clone https://github.com/needfortri/gatling-demo.git
 
 # Run simulation
 sudo docker run -it --rm \
-  -e JAVA_OPTS="-DMAX_NB_USERS=${MAX_NB_USERS} -D${TEST_DURATION} -DSERVER_DOMAIN=${SERVER_DOMAIN} -DSERVER_ENDPOINT=${SERVER_ENDPOINT}"\
+  -e JAVA_OPTS="-DMAX_NB_USERS=${MAX_NB_USERS} -DTEST_DURATION=${TEST_DURATION} -DSERVER_DOMAIN=${SERVER_DOMAIN} -DSERVER_ENDPOINT=${SERVER_ENDPOINT}"\
   -v ~/gatling-demo/conf:/opt/gatling/conf \
   -v ~/gatling-demo/user-files:/opt/gatling/user-files \
   -v ~/gatling-demo/results:/opt/gatling/results \
@@ -38,4 +38,8 @@ aws s3 sync ~/gatling-demo/results s3://${S3_BUCKET}/
 exit
 docker-machine rm $INSTANCE_NAME
   
-  
+# Troubleshooting
+
+"Error checking and/or regenerating the certs: There was an error validating certificates for host"
+docker-machine regenerate-certs my-gatling
+docker-machine restart my-gatling
