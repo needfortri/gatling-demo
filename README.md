@@ -12,6 +12,7 @@ MAX_NB_USERS=10000
 TEST_DURATION=60
 SERVER_DOMAIN=https://api.example.com
 SERVER_ENDPOINT=/api/example
+REQUEST_BODY='{some:"data"}'
 S3_BUCKET=my-bucket
 AWS_ACCESS_KEY=AWS_ACCESS_KEY
 AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY
@@ -22,11 +23,12 @@ cd ~/
 git clone https://github.com/needfortri/gatling-demo.git
 
 # Run simulation
+GATLING_PATH=~/gatling-demo
 sudo docker run -it --rm \
-  -e JAVA_OPTS="-DMAX_NB_USERS=${MAX_NB_USERS} -DTEST_DURATION=${TEST_DURATION} -DSERVER_DOMAIN=${SERVER_DOMAIN} -DSERVER_ENDPOINT=${SERVER_ENDPOINT}"\
-  -v ~/gatling-demo/conf:/opt/gatling/conf \
-  -v ~/gatling-demo/user-files:/opt/gatling/user-files \
-  -v ~/gatling-demo/results:/opt/gatling/results \
+  -e JAVA_OPTS="-DMAX_NB_USERS=${MAX_NB_USERS} -DTEST_DURATION=${TEST_DURATION} -DREQUEST_BODY=${REQUEST_BODY} -DSERVER_DOMAIN=${SERVER_DOMAIN} -DSERVER_ENDPOINT=${SERVER_ENDPOINT}"\
+  -v ${GATLING_PATH}/conf:/opt/gatling/conf \
+  -v ${GATLING_PATH}/user-files:/opt/gatling/user-files \
+  -v ${GATLING_PATH}/results:/opt/gatling/results \
   denvazh/gatling
   
 # Export results on S3 bucket
